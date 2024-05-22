@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +10,14 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(private http: HttpClient, private router: Router) {
+  }
+  ressources:any
 
+  ionViewWillEnter() {
+    this.http.get('https://127.0.0.1:8000/api/ressources')
+      .subscribe((data) => {
+        this.ressources = data
+    });
+  }
 }

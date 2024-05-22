@@ -3,13 +3,28 @@
     <ion-title>
       Ressources
     </ion-title>
+    <ion-buttons slot="end" style="background-color:#fdd62c; display: flex; align-items: center;">
+      <img src="assets/icon/favicon.png" alt="Logo" style="width: 50px; height: 50px;" />
+      <ion-title style="color: inherit;margin-left: -20px;">CiviLink</ion-title>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Ressources</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content >
+ 
+    
+      
+        <ion-card *ngFor="let ressource of ressources">
+          <ion-item *ngIf="ressource.multimedia != null">
+            <img alt="img de Ressources" src="{{ressource.multimedia}}"/>
+          </ion-item>
+          <ion-card-header>
+            <ion-card-title>{{ressource.titre}}</ion-card-title>
+            <ion-card-subtitle>{{ressource.contenu}}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+    
+
+      
+
 </ion-content>
