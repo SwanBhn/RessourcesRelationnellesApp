@@ -1,4 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { RelationService } from '../services/relations/relation.service';
 
 @Component({
   selector: 'app-tab2',
@@ -6,18 +8,30 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  constructor(private http: HttpClient, private relationService: RelationService) {
+  }
 
-  //TODO: prendre les données de l'API
-  Amis : any[] = [
-      { id: 1, firstName: "truc", lastName: "bidule", photo: "https://upload.wikimedia.org/wikipedia/commons/7/78/Image.jpg" },
-      { id: 2, firstName: "truc2", lastName: "bidule2", photo: null },
-      { id: 3, firstName: "truc3", lastName: "bidule3", photo: null },
-      { id: 4, firstName: "truc4", lastName: "bidule4", photo: null },
-      { id: 5, firstName: "truc5", lastName: "bidule5", photo: null },
-      { id: 6, firstName: "truc6", lastName: "bidule6", photo: null },
-      { id: 7, firstName: "truc7", lastName: "bidule7", photo: null },
-      { id: 8, firstName: "truc8", lastName: "bidule8", photo: null },
-      { id: 9, firstName: "truc9", lastName: "bidule9", photo: null },
-      { id: 10, firstName: "truc10", lastName: "bidule10", photo: null }
-  ]
+  amis:any;
+  urlRelation:string = "http://127.0.0.1:8000/api/relations/";
+  urlDelete:string = "";
+  userId:number = 1;
+
+  ionViewWillEnter() {
+    this.http.get('http://127.0.0.1:8000/api/relations/'+this.userId)
+      .subscribe((data) => {
+        this.amis = data
+    });
+  }
+
+  deleteRelation(ami: number): void {
+    this.relationService.deleteRelation(this.userId, ami).subscribe(
+      () => {
+        console.log('Relation supprimée avec succès');
+        window.location.reload();
+      },
+      error => {
+        console.error('Une erreur et survenue lors de la suppression!', error);
+      }
+    );
+  }
 }
