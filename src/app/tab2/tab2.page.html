@@ -3,13 +3,28 @@
     <ion-title>
       Relations
     </ion-title>
+    <ion-buttons slot="end" style="background-color:#fdd62c; display: flex; align-items: center;">
+      <img src="assets/icon/favicon.png" alt="Logo" style="width: 50px; height: 50px;" />
+      <ion-title style="color: inherit;margin-left: -20px;">CiviLink</ion-title>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Relations</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-item *ngFor="let unAmi of amis" color="medium">
+      <!-- icone de l'utilisateur -->
+      <ion-avatar *ngIf="unAmi.photo != null" style="margin-right: 10px;">
+        <img src="{{unAmi.photo}}">
+      </ion-avatar>
+      <ion-avatar *ngIf="unAmi.photo == null" style="margin-right: 10px;">
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png">
+      </ion-avatar>
+      
+      <!-- Prenom Nom + Bouton Profil / Supprimer  -->
+      <ion-label>{{ unAmi.nom }}</ion-label>
+      <ion-button color="warning" style="margin-right: 5px;">Profil</ion-button>
+      <ion-button (click)="deleteRelation(unAmi.idAmi)" style="color: red;">Supprimer</ion-button>
+    </ion-item>
+  </ion-card>
 </ion-content>

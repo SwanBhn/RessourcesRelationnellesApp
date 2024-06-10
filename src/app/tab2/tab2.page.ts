@@ -1,4 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { RelationService } from '../services/relations/relation.service';
 
 @Component({
   selector: 'app-tab2',
@@ -6,7 +8,30 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  constructor(private http: HttpClient, private relationService: RelationService) {
+  }
 
-  constructor() {}
+  amis:any;
+  urlRelation:string = "http://127.0.0.1:8000/api/relations/";
+  urlDelete:string = "";
+  userId:number = 1;
 
+  ionViewWillEnter() {
+    this.http.get('http://127.0.0.1:8000/api/relations/'+this.userId)
+      .subscribe((data) => {
+        this.amis = data
+    });
+  }
+
+  deleteRelation(ami: number): void {
+    this.relationService.deleteRelation(this.userId, ami).subscribe(
+      () => {
+        console.log('Relation supprimée avec succès');
+        window.location.reload();
+      },
+      error => {
+        console.error('Une erreur et survenue lors de la suppression!', error);
+      }
+    );
+  }
 }

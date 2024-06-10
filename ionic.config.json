@@ -1,5 +1,7 @@
 {
   "name": "RessourcesRelationnellesApp",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
