@@ -13,19 +13,19 @@
 <ion-content [fullscreen]="true">
 
   <ion-list [inset]="true">
-    <ion-item *ngFor="let unAmis of Amis">
+    <ion-item *ngFor="let unAmi of amis">
       <!-- icone de l'utilisateur -->
-      <ion-avatar *ngIf="unAmis.photo != null" style="margin-right: 10px;">
-        <img src="{{unAmis.photo}}">
+      <ion-avatar *ngIf="unAmi.photo != null" style="margin-right: 10px;">
+        <img src="{{unAmi.photo}}">
       </ion-avatar>
-      <ion-avatar *ngIf="unAmis.photo == null" style="margin-right: 10px;">
+      <ion-avatar *ngIf="unAmi.photo == null" style="margin-right: 10px;">
         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png">
       </ion-avatar>
       
       <!-- Prenom Nom + Bouton Profil / Supprimer  -->
-      <ion-label>{{ unAmis.firstName + " " + unAmis.lastName }}</ion-label>
+      <ion-label>{{ unAmi.nom }}</ion-label>
       <ion-button color="light" style="margin-right: 5px;">Profil</ion-button>
-      <ion-button style="color: red;">Supprimer</ion-button>
+      <ion-button (click)="deleteRelation(unAmi.idAmi)" style="color: red;">Supprimer</ion-button>
     </ion-item>
   </ion-list>
 
