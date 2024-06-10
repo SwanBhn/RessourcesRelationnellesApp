@@ -10,21 +10,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
- 
+<ion-content>
+  <ion-card *ngFor="let ressource of ressources" class="resource-card">
+    <img [src]="ressource.multimedia" class="resource-image" />
+    <ion-card-header>
+      <ion-card-title>{{ ressource.titre }}</ion-card-title>
+      <ion-card-subtitle>{{ ressource.contenu }}</ion-card-subtitle>
+    </ion-card-header>
     
-      
-        <ion-card *ngFor="let ressource of ressources">
-          <ion-item *ngIf="ressource.multimedia != null">
-            <img alt="img de Ressources" src="{{ressource.multimedia}}"/>
-          </ion-item>
-          <ion-card-header>
-            <ion-card-title>{{ressource.titre}}</ion-card-title>
-            <ion-card-subtitle>{{ressource.contenu}}</ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
-    
-
-      
-
+  </ion-card>
+  
 </ion-content>
