@@ -15,7 +15,7 @@ export class Tab3Page {
   ressources:any
 
   ionViewWillEnter() {
-    this.http.get('https://127.0.0.1:8000/api/ressources')
+    this.http.get('https://185.216.27.78:8000/api/ressources')
       .subscribe((data) => {
         this.ressources = data
     });

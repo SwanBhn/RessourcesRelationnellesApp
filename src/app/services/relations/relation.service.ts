@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RelationService {
-  private urlRelation = 'http://127.0.0.1:8000/api/relations/';
+  private urlRelation = 'http://185.216.27.78:8000/api/relations/';
 
   constructor(private http: HttpClient) {}
 
