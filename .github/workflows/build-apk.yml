@@ -1,0 +1,42 @@
+name: build
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  buildApk:
+    name: BuildApk
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/swanbhn/ressourcesrelationnellesapp/ionicandroidbuild:latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+          
+      - name: Install npm deps
+        run: npm install
+
+      - name: Sync Android
+        run: ionic capacitor sync android
+
+      - name: Check-Android
+        run: ionic capacitor doctor android
+
+      - name: Add Android
+        if: steps.Check-Android.outputs.android_installed == 'false'
+        run: ionic capacitor add android
+
+      - name: Build Apk
+        run: |
+          ionic capacitor copy android
+          cd android
+          ./gradlew assembleDebug
+
+      - name: Upload Apk
+        uses: actions/upload-artifact@v4
+        with:
+          name: RessourcesRelationnellesApk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
