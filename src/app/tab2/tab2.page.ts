@@ -12,12 +12,12 @@ export class Tab2Page {
   }
 
   amis:any;
-  urlRelation:string = "http://127.0.0.1:8000/api/relations/";
+  urlRelation:string = "http://185.216.27.78:8000/api/relations/";
   urlDelete:string = "";
   userId:number = 1;
 
   ionViewWillEnter() {
-    this.http.get('http://127.0.0.1:8000/api/relations/'+this.userId)
+    this.http.get('http://185.216.27.78:8000/api/relations/'+this.userId)
       .subscribe((data) => {
         this.amis = data
     });
